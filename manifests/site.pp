@@ -6,13 +6,7 @@
 #}
 
 include java
-package { jdk-8u31-linux-x64.rpm :
 
-	provider => rpm,
-	source => "puppet:///modules/java/jdk-8u31-linux-x64.rpm",
-	ensure => installed
-
-}
 
 node 'puppet-94c34466-bcae-40e5-9fb6-f65558065c02.novalocal' {
 
