@@ -1,17 +1,18 @@
+#Use the below to test if everything is fine
 #file {'/tmp/example-ip':                                            # resource type file and filename
 #  ensure  => present,                                               # make sure it exists
 #  mode    => 0644,                                                  # file permissions
 #  content => "Here is my Public IP Address: ${ipaddress_eth0}.\n",  # note the ipaddress_eth0 fact
 #}
 
-#include java
-#package { jdk-8u31-linux-x64.rpm :
+include java
+package { jdk-8u31-linux-x64.rpm :
 
-#	provider => rpm,
-#	source => "puppet:///modules/java/jdk-8u31-linux-x64.rpm",
-#	ensure => installed
+	provider => rpm,
+	source => "puppet:///modules/java/jdk-8u31-linux-x64.rpm",
+	ensure => installed
 
-#}
+}
 
 node 'puppet-94c34466-bcae-40e5-9fb6-f65558065c02.novalocal' {
 
