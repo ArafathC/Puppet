@@ -7,6 +7,11 @@ class hadoop(
 	Exec{
 			path => ["/usr/bin","/usr/sbin","/bin"],
          }
+# Create users hdfs,mapred,yarn
+
+# Write Custom configuration template files 
+
+
 
     file { "/usr/lib/hadoop/${hadoop_archive}" :
                         ensure => "present",
@@ -31,21 +36,6 @@ class hadoop(
                # require => File['/usr/lib/hadoop/${hadoop_archive}'],
         }
 
-    #file{ '/data/1/' :
-    #		ensure => directory,
-    #		owner => hdfs,
-    #		group => hadoop,
-    #		mode => 755,
-
-    #}
-	
-#	exec{'move hadoop':
- #               cwd => '/tmp',
-  #              creates => $hadoop_home,
-   #             require => File['/usr/lib/hadoop'],
-    #            command => "mv ${hadoop_folder} /usr/lib/hadoop/",
-                #before => File['/usr/lib/hadoop/hadoop-2.6.0/etc/hadoop/yarn-site.xml'],
-        #}
 	
 
     file{ '/usr/lib/hadoop/hadoop-2.6.0/etc/hadoop/core-site.xml':
@@ -72,15 +62,6 @@ class hadoop(
     			source => "puppet:///modules/hadoop/yarn-site.xml",
 			require => Exec['extract hadoop']
     }
-
-
-#exec{'install hadoop':
-     #           require => Exec['move hadoop'],
-      #          logoutput => true,
-       #         command => "update-alternatives --install /bin/hadoop hadoop ${hadoop_home}/bin/hadoop 1"
-       # }
-          
-
 
     file{'/etc/profile.d/hadoop.sh':
 				content => "export HADOOP_HOME=/usr/lib/hadoop/hadoop-2.6.0/\nexport HADOOP_MAPRED_HOME=/usr/lib/hadoop/hadoop-2.6.0/\nexport HADOOP_COMMON_HOME=/usr/lib/hadoop/hadoop-2.6.0/\nexport HADOOP_HDFS_HOME=/usr/lib/hadoop/hadoop-2.6.0/\nexport YARN_HOME=/usr/lib/hadoop/hadoop-2.6.0/\nexport HADOOP_COMMON_LIB_NATIVE_DIR=/usr/lib/hadoop/hadoop-2.6.0/lib/native\nexport PATH=$PATH:\$HADOOP_HOME/sbin:\$HADOOP_HOME/bin\n",			
